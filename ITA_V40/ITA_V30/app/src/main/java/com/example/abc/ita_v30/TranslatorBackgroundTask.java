@@ -5,6 +5,7 @@ package com.example.abc.ita_v30;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,6 +24,8 @@ public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
     TranslatorBackgroundTask(Context ctx){
         this.ctx = ctx;
     }
+
+    String  resultString;
 
     @Override
     protected String doInBackground(String... params) {
@@ -56,7 +59,7 @@ public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
             httpJsonConnection.disconnect();
 
             //Making result human readable
-            String resultString = jsonStringBuilder.toString().trim();
+            resultString = jsonStringBuilder.toString().trim();
             //Getting the characters between [ and ]
             resultString = resultString.substring(resultString.indexOf('[')+1);
             resultString = resultString.substring(0,resultString.indexOf("]"));
@@ -65,6 +68,7 @@ public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
             resultString = resultString.substring(0,resultString.indexOf("\""));
 
             Log.d("Translation Result:", resultString);
+
             return jsonStringBuilder.toString().trim();
 
         } catch (MalformedURLException e) {
@@ -82,6 +86,8 @@ public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        Toast.makeText(ctx, resultString, Toast.LENGTH_LONG).show();
+        super.onPostExecute(result);
     }
 
     @Override
