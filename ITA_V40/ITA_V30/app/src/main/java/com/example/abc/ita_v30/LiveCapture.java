@@ -24,7 +24,7 @@ import java.io.IOException;
 public class LiveCapture extends AppCompatActivity {
 
     SurfaceView cameraView;
-    TextView textView;
+    static TextView textView;
     CameraSource cameraSource;
     final int RequestCameraPermissionID = 1001;
     Context context=this;
@@ -120,7 +120,7 @@ public class LiveCapture extends AppCompatActivity {
                                 String languagePair = "en-fr";
                                 String text = stringBuilder.toString();
                                 AsyncTask<String, Void, String> result = Translate(text,languagePair);
-                                textView.setText(result.toString());
+                                //textView.setText(result.toString());
                             }
                         });
                     }
@@ -132,9 +132,16 @@ public class LiveCapture extends AppCompatActivity {
 
 
     AsyncTask<String, Void, String> Translate(String textToBeTranslated, String languagePair){
+
         TranslatorBackgroundTask translatorBackgroundTask= new TranslatorBackgroundTask(context);
-        AsyncTask<String, Void, String> translationResult = translatorBackgroundTask.execute(textToBeTranslated,languagePair); // Returns the translated text as a String
+
+
+        AsyncTask<String, Void, String> translationResult = translatorBackgroundTask.execute(textToBeTranslated,languagePair);
+
+
         Log.d("Translation Result", String.valueOf(translationResult)); // Logs the result in Android Monitor
+
+
         return translationResult;
     }
 
