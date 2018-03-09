@@ -67,16 +67,16 @@ public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
             resultString = resultString.substring(resultString.indexOf("\"")+1);
             resultString = resultString.substring(0,resultString.indexOf("\""));
 
-            Log.d("Translation Result:", resultString);
+            Log.d("Translation Result:", jsonStringBuilder.toString().trim());
 
-            return jsonStringBuilder.toString().trim();
-
+            return resultString;
+            //return resultString;
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return resultString;
     }
 
     @Override
@@ -86,8 +86,9 @@ public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(ctx, resultString, Toast.LENGTH_LONG).show();
+       // Toast.makeText(ctx, resultString, Toast.LENGTH_LONG).show();
         super.onPostExecute(result);
+        LiveCapture.textView.setText(result.toString());
     }
 
     @Override
