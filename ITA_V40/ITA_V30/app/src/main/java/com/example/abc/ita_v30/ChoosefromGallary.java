@@ -34,6 +34,8 @@ public class ChoosefromGallary extends AppCompatActivity implements View.OnClick
     private TessBaseAPI mTess;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

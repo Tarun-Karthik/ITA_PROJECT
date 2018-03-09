@@ -106,6 +106,8 @@ public class LiveCapture extends AppCompatActivity {
                         textView.post(new Runnable() {
                             @Override
                             public void run() {
+
+
                                 StringBuilder stringBuilder = new StringBuilder();
                                 for(int i=0;i<items.size();i++)
                                 {
@@ -113,6 +115,8 @@ public class LiveCapture extends AppCompatActivity {
                                     stringBuilder.append(item.getValue());
                                     stringBuilder.append("\n");
                                 }
+
+
                                 String languagePair = "en-fr";
                                 String text = stringBuilder.toString();
                                 AsyncTask<String, Void, String> result = Translate(text,languagePair);
@@ -125,6 +129,8 @@ public class LiveCapture extends AppCompatActivity {
         }
 
     }
+
+
     AsyncTask<String, Void, String> Translate(String textToBeTranslated, String languagePair){
         TranslatorBackgroundTask translatorBackgroundTask= new TranslatorBackgroundTask(context);
         AsyncTask<String, Void, String> translationResult = translatorBackgroundTask.execute(textToBeTranslated,languagePair); // Returns the translated text as a String
