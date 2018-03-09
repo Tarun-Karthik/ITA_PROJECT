@@ -120,7 +120,7 @@ public class LiveCapture extends AppCompatActivity {
                                 String languagePair = "en-fr";
                                 String text = stringBuilder.toString();
                                 AsyncTask<String, Void, String> result = Translate(text,languagePair);
-                                textView.setText((CharSequence) result);
+                                textView.setText(result.toString());
                             }
                         });
                     }
