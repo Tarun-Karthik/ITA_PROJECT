@@ -52,6 +52,7 @@ public class LiveCapture extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        MainActivity.part = 1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_capture);
         cameraView = (SurfaceView) findViewById(R.id.surface_view);
