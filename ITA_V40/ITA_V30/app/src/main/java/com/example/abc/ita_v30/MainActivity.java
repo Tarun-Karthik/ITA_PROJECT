@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
+    static int part = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        part = 0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
