@@ -1,11 +1,13 @@
 package com.example.abc.ita_v30;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,15 +31,17 @@ public class ChoosefromGallary extends AppCompatActivity implements View.OnClick
     private static final String TAG = "MainActivity";
     InputStream image_stream;
     String datapath = "";
-
+    Context context=this;
     Bitmap bitmap;
     private TessBaseAPI mTess;
+    static TextView OCRTextView;
 
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        MainActivity.part = 2;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choosefrom_gallary);
         findViewById(R.id.button4).setOnClickListener(this);
@@ -83,8 +87,11 @@ public class ChoosefromGallary extends AppCompatActivity implements View.OnClick
         String OCRresult = null;
         mTess.setImage(bitmap);
         OCRresult = mTess.getUTF8Text();
-        TextView OCRTextView = (TextView) findViewById(R.id.OCRTextView);
-        OCRTextView.setText(OCRresult);
+        String languagePair = "en-fr";
+        //String text = stringBuilder.toString();
+        AsyncTask<String, Void, String> result = Translate(OCRresult,languagePair);
+        OCRTextView = (TextView) findViewById(R.id.OCRTextView);
+        //OCRTextView.setText(OCRresult);
     }
 
     private void checkFile(File dir) {
@@ -147,6 +154,20 @@ public class ChoosefromGallary extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         openImageChooser();
+    }
+
+    AsyncTask<String, Void, String> Translate(String textToBeTranslated, String languagePair){
+
+        TranslatorBackgroundTask translatorBackgroundTask= new TranslatorBackgroundTask(context);
+
+
+        AsyncTask<String, Void, String> translationResult = translatorBackgroundTask.execute(textToBeTranslated,languagePair);
+
+
+        Log.d("Translation Result", String.valueOf(translationResult)); // Logs the result in Android Monitor
+
+
+        return translationResult;
     }
 
 }
