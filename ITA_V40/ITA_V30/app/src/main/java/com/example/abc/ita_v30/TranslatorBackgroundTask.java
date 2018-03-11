@@ -88,7 +88,10 @@ public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
        // Toast.makeText(ctx, resultString, Toast.LENGTH_LONG).show();
         super.onPostExecute(result);
+        if(MainActivity.part==1)
         LiveCapture.textView.setText(result.toString());
+        else if(MainActivity.part==2)
+        ChoosefromGallary.OCRTextView.setText(result.toString());
     }
 
     @Override
