@@ -26,6 +26,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import static com.example.abc.ita_v30.MainActivity.languagePair;
+
 public class ChoosefromGallary2 extends AppCompatActivity implements View.OnClickListener {
 
     private static final int SELECT_PICTURE = 100;
@@ -89,7 +91,7 @@ public class ChoosefromGallary2 extends AppCompatActivity implements View.OnClic
                         sb.append(myitem.getValue());
                         sb.append("\n");
                     }
-                    String languagePair = "en-fr";
+                    //String languagePair = "en-fr";
                     String text = sb.toString();
                     AsyncTask<String, Void, String> result = Translate(text,languagePair);
                     //textView.setText(sb.toString());
