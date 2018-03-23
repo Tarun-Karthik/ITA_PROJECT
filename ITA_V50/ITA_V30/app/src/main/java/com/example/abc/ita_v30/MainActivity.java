@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         radioGroup = (RadioGroup)findViewById(R.id.radio);
         int selectedid = radioGroup.getCheckedRadioButtonId();
         radioButton = (RadioButton)findViewById(selectedid);
-        String lang = radioButton.getText().toString();
-        if(lang == "French")
+        //String lang = radioButton.getText().toString();
+        /*if(lang == "French")
         {
             languagePair = "en-fr";
         }
@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         else if(lang == "Malyalam")
         {
             languagePair = "en-ml";
-        }
+        }*/
+        languagePair = "en-fr";
 
     }
 
