@@ -1,7 +1,5 @@
-package com.example.abc.ita_v30;
-/**
- * Created by abc on 2/23/2018.
- */
+package com.example.karthik.ita_v60;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -12,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 
@@ -37,8 +34,8 @@ public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
 
         try {
             //Set up the translation call URL
-            String yandexKey = "trnsl.1.1.20180202T095559Z.5433624d116147e4.81ba84a1e216595d796825120a8a15b15d0db492";
-            String yandexUrl = "https://translate.yandex.net/api/v1.4/tr.json/translate?key=" + yandexKey
+            String yandexKey = "trnsl.1.1.20180225T111239Z.7d372ce2248b20fb.b3119bc8441a9b2184504a84a25dfddaa2483073";
+            String yandexUrl = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + yandexKey
                     + "&text=" + textToBeTranslated + "&lang=" + languagePair;
             URL yandexTranslateURL = new URL(yandexUrl);
 
@@ -46,6 +43,7 @@ public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
             HttpURLConnection httpJsonConnection = (HttpURLConnection) yandexTranslateURL.openConnection();
             InputStream inputStream = httpJsonConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
 
             //Set string builder and insert retrieved JSON result into it
             StringBuilder jsonStringBuilder = new StringBuilder();
@@ -67,12 +65,10 @@ public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
             resultString = resultString.substring(resultString.indexOf("\"")+1);
             resultString = resultString.substring(0,resultString.indexOf("\""));
 
-            Log.d("Translation Result:", jsonStringBuilder.toString().trim());
+            //Log.d("Translation Result:", jsonStringBuilder.toString().trim());
 
             return resultString;
             //return resultString;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,19 +82,12 @@ public class TranslatorBackgroundTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-       // Toast.makeText(ctx, resultString, Toast.LENGTH_LONG).show();
+        //Log.d("Translation Result:", result.trim());
         super.onPostExecute(result);
-        if(MainActivity.part==1)
-        LiveCapture.textView.setText(result.toString());
-        else if(MainActivity.part==2) {
-            if(result.toString()!=null) {
-                ChoosefromGallary2.textView.setText(result.toString());
-            }
-            else
-            {
-                Log.d("String is null", String.valueOf(result.toString()));
-            }
-        }
+        if(ScanActivity.part==1)
+            LiveCapture.textView.setText(result);
+        else if(ScanActivity.part==2)
+            ChoosefromGallary.textView.setText(result);
     }
 
     @Override

@@ -1,11 +1,12 @@
-package com.example.abc.ita_v30;
+package com.example.karthik.ita_v60;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
-import com.example.abc.ita_v30.ui.camera.GraphicOverlay;
+
+import com.example.karthik.ita_v60.ui.camera.GraphicOverlay;
 import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 
@@ -26,7 +27,7 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
     private final TextBlock mText;
 
     OcrGraphic(GraphicOverlay overlay, TextBlock text) {
-        super(overlay,"");
+        super(overlay);
 
         mText = text;
 
@@ -77,7 +78,7 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
         return (rect.left < x && rect.right > x && rect.top < y && rect.bottom > y);
     }
 
-    /**java
+    /**
      * Draws the text block annotations for position, size, and raw value on the supplied canvas.
      */
     @Override
@@ -103,3 +104,4 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
         }
     }
 }
+

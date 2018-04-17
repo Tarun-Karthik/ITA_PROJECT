@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "273655823458",
+    "firebase_url": "https://ita-v60.firebaseio.com",
+    "project_id": "ita-v60",
+    "storage_bucket": "ita-v60.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273655823458:android:9b34c68851ec044c",
+        "android_client_info": {
+          "package_name": "com.example.karthik.ita_v60"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273655823458-53sa5pb6gq841q0buudjv0gg4dki4mpn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3hvgmMLYD0Xd12mPcS0yJoXNY19qY-NI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

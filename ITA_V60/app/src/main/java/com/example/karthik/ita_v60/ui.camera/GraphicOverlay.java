@@ -1,4 +1,4 @@
-package com.example.abc.ita_v30.ui.camera;
+package com.example.karthik.ita_v60.ui.camera;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -104,7 +104,7 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
         }
 
         public void postInvalidate() {
-            postInvalidate();
+            mOverlay.postInvalidate();
         }
     }
 
@@ -193,3 +193,4 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
         }
     }
 }
+

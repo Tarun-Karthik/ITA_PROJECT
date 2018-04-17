@@ -1,4 +1,4 @@
-package com.example.abc.ita_v30;
+package com.example.karthik.ita_v60;
 
 import android.Manifest;
 import android.content.Context;
@@ -13,33 +13,23 @@ import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
-import com.example.abc.ita_v30.ui.camera.GraphicOverlay;
+
 import java.io.IOException;
 
-public class LiveCapture extends AppCompatActivity implements Detector.Processor<TextBlock> {
+public class LiveCapture extends AppCompatActivity {
 
     SurfaceView cameraView;
     static TextView textView;
     CameraSource cameraSource;
     final int RequestCameraPermissionID = 1001;
     Context context=this;
-        
-    private GraphicOverlay<OcrGraphic> mGraphicOverlay;
 
-    public LiveCapture()
-    {
-        super();
-    }
-
-    LiveCapture(GraphicOverlay<OcrGraphic> ocrGraphicOverlay) {
-        mGraphicOverlay = ocrGraphicOverlay;
-
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -63,23 +53,20 @@ public class LiveCapture extends AppCompatActivity implements Detector.Processor
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        MainActivity.part = 1;
+        ScanActivity.part = 1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_capture);
         cameraView = (SurfaceView) findViewById(R.id.surface_view);
         textView = (TextView) findViewById(R.id.text_view);
 
         TextRecognizer textRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
-        textRecognizer.setProcessor(new LiveCapture(mGraphicOverlay) {
-
-        });
         if (!textRecognizer.isOperational()) {
-            Log.w("MainActivity", "Dectector dependcies are not yet available");
+            Log.w("ScanActivity", "Dectector dependcies are not yet available");
         } else {
             cameraSource = new CameraSource.Builder(getApplicationContext(), textRecognizer)
                     .setFacing(CameraSource.CAMERA_FACING_BACK)
                     .setRequestedPreviewSize(1280, 1024)
-                    .setRequestedFps(15.0f)
+                    .setRequestedFps(2.0f)
                     .setAutoFocusEnabled(true)
                     .build();
             cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
@@ -107,35 +94,16 @@ public class LiveCapture extends AppCompatActivity implements Detector.Processor
                 }
             });
 
+            textRecognizer.setProcessor(new Detector.Processor<TextBlock>() {
+                @Override
+                public void release() {
 
-        }
+                }
 
-    }
-
-
-    AsyncTask<String, Void, String> Translate(String textToBeTranslated, String languagePair){
-
-        TranslatorBackgroundTask translatorBackgroundTask= new TranslatorBackgroundTask(context);
-
-
-        AsyncTask<String, Void, String> translationResult = translatorBackgroundTask.execute(textToBeTranslated,languagePair);
-
-
-        Log.d("Translation Result", String.valueOf(translationResult)); // Logs the result in Android Monitor
-
-
-        return translationResult;
-    }
-
-    @Override
-    public void release() {mGraphicOverlay.clear();
-
-    }
-
-    @Override
-    public void receiveDetections(Detector.Detections<TextBlock> detections) {
-        SparseArray<TextBlock> items = detections.getDetectedItems();
-                    /*if(items.size()!=0)
+                @Override
+                public void receiveDetections(Detector.Detections<TextBlock> detections) {
+                    final SparseArray<TextBlock> items = detections.getDetectedItems();
+                    if(items.size()!=0)
                     {
                         textView.post(new Runnable() {
                             @Override
@@ -150,23 +118,36 @@ public class LiveCapture extends AppCompatActivity implements Detector.Processor
                                     stringBuilder.append("\n");
                                 }
 
-
-                                //String languagePair = "en-fr";
+                                String languagePair = "en-fr";
                                 String text = stringBuilder.toString();
-                                AsyncTask<String, Void, String> result = Translate(text,MainActivity.languagePair);
+
+                                //Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+
+                                AsyncTask<String, Void, String> result = Translate(text,languagePair);
                                 //textView.setText(result.toString());
                             }
                         });
-                    }*/
-        for(int i=0;i<items.size();i++)
-        {
-            TextBlock item = items.valueAt(i);
-            if(item!=null && item.getValue()!=null){
-                Log.d("Processor", "Text detected! " + item.getValue());
-            }
-            OcrGraphic graphic = new OcrGraphic(mGraphicOverlay, item);
-            mGraphicOverlay.add(graphic);
+                    }
+                }
+            });
         }
 
     }
+
+
+    AsyncTask<String, Void, String> Translate(String textToBeTranslated, String languagePair){
+
+        TranslatorBackgroundTask translatorBackgroundTask= new TranslatorBackgroundTask(context);
+
+
+        AsyncTask<String, Void, String> translationResult = translatorBackgroundTask.execute(textToBeTranslated,languagePair);
+
+
+        Log.d("Translation Result", String.valueOf(textToBeTranslated)); // Logs the result in Android Monitor
+
+
+        return translationResult;
+    }
+
 }
+
