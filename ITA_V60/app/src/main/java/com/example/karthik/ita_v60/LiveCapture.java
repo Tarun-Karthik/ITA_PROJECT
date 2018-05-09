@@ -29,6 +29,7 @@ public class LiveCapture extends AppCompatActivity {
     CameraSource cameraSource;
     final int RequestCameraPermissionID = 1001;
     Context context=this;
+    public String languagePair ;
 
 
     @Override
@@ -55,6 +56,8 @@ public class LiveCapture extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         ScanActivity.part = 1;
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+        languagePair = extras.getString("lang");
         setContentView(R.layout.activity_live_capture);
         cameraView = (SurfaceView) findViewById(R.id.surface_view);
         textView = (TextView) findViewById(R.id.text_view);
@@ -118,7 +121,7 @@ public class LiveCapture extends AppCompatActivity {
                                     stringBuilder.append("\n");
                                 }
 
-                                String languagePair = "en-fr";
+
                                 String text = stringBuilder.toString();
 
                                 //Toast.makeText(context, text, Toast.LENGTH_SHORT).show();

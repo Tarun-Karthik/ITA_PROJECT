@@ -34,10 +34,14 @@ public class ChoosefromGallary extends AppCompatActivity implements View.OnClick
     Bitmap bitmap;
     ImageView imageView;
     static TextView textView;
+    String languagePair ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ScanActivity.part=2;
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+        languagePair = extras.getString("lang");
         setContentView(R.layout.activity_choosefrom_gallary);
         imageView = (ImageView)findViewById(R.id.imgView);
         textView = (TextView)findViewById(R.id.OCRTextView);
@@ -87,7 +91,7 @@ public class ChoosefromGallary extends AppCompatActivity implements View.OnClick
                         sb.append(myitem.getValue());
                         sb.append("\n");
                     }
-                    String languagePair = "en-fr";
+
                     String text = sb.toString();
                     //Toast.makeText(context, sb, Toast.LENGTH_SHORT).show();
 

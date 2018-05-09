@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.app.aniket.visualbasedtranslator.ScanActivity">
+    tools:context="com.example.karthik.ita_v60.ScanActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:orientation="vertical">
 
 
@@ -20,20 +19,77 @@
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_margin="16dp"
-            android:onClick="LiveCapture"
             android:text="Live Capture"
-            tools:ignore="MissingConstraints"
-            />
+            tools:ignore="MissingConstraints" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_margin="16dp"
-            android:onClick="ChoosefromGallary"
-            android:text="Choose from Gallary"
-            />
+            android:text="Choose from Gallary" />
+
+        <Button
+            android:id="@+id/btnDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="39dp"
+            android:text="Confirm Language" />
+
+        <RadioGroup
+            android:id="@+id/radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <RadioButton
+                android:id="@+id/French"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textView"
+                android:layout_alignStart="@+id/textView"
+                android:layout_below="@+id/textView"
+                android:layout_marginTop="31dp"
+                android:checked="true"
+                android:duplicateParentState="false"
+                android:text="French" />
+
+            <RadioButton
+                android:id="@+id/Hindi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/French"
+                android:layout_alignStart="@+id/French"
+                android:layout_below="@+id/French"
+                android:layout_marginTop="14dp"
+                android:text=" Hindi" />
+
+            <RadioButton
+                android:id="@+id/Kannada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/Hindi"
+                android:layout_alignStart="@+id/Hindi"
+                android:layout_below="@+id/Hindi"
+                android:layout_marginTop="17dp"
+                android:text="Kannada" />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/Kannada"
+                android:layout_alignStart="@+id/Kannada"
+                android:layout_below="@+id/Kannada"
+                android:layout_marginTop="14dp"
+                android:text="Malayalam" />
+        </RadioGroup>
 
     </LinearLayout>
+
+
 
 </RelativeLayout>
