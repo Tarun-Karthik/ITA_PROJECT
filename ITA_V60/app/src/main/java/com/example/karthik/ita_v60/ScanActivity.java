@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static android.widget.Toast.LENGTH_LONG;
@@ -38,8 +39,10 @@ public class ScanActivity extends AppCompatActivity {
                 int rid = radioGroup.indexOfChild(radio);
                 radioButton = (RadioButton) radioGroup.getChildAt(rid);
                 String lang = (String) radioButton.getText();
-                Toast.makeText(con, lang,LENGTH_LONG).show();
-                language = new StringBuffer("null");
+                TextView textView = (TextView)findViewById(R.id.output);
+                textView.setText(lang);
+                //Toast.makeText(con, lang,LENGTH_LONG).show();
+                language = new StringBuffer("en-en");
                 if(lang.equals("French"))
                 {
                     language.delete(0,language.length());
